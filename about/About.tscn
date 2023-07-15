@@ -28,7 +28,7 @@ margin_bottom = 68.5
 theme = ExtResource( 2 )
 text = "Developer: Reza Nazeri
 
-Website: naazeri.com"
+Website: naazeri.ir"
 align = 1
 
 [node name="BackButton" type="Button" parent="Node2D"]

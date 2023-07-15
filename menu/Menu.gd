@@ -12,7 +12,8 @@ func _ready():
 
 
 func _on_StartButton_button_up():
-	# OS.set_window_fullscreen(!OS.window_fullscreen)
+	if !OS.window_fullscreen and OS.get_name() == "HTML5":
+		OS.set_window_fullscreen(true)
 	get_tree().change_scene("res://game/Game.tscn")
 
 
@@ -21,7 +22,7 @@ func _on_AboutButton_button_up():
 
 
 func _on_ExitButton_button_up():
-	# if OS.window_fullscreen and OS.get_name() == "HTML5":
-	# 	OS.set_window_fullscreen(false)
+	if OS.window_fullscreen and OS.get_name() == "HTML5":
+		OS.set_window_fullscreen(false)
 
 	get_tree().quit()
