@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=5 format=2]
+
+[ext_resource path="res://asset/font/Peach-Days-dynamicFont.tres" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://asset/font/Peach-Days.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 55
+font_data = ExtResource( 1 )
+
+[resource]
+Button/fonts/font = SubResource( 2 )
+Label/fonts/font = SubResource( 3 )
+VBoxContainer/constants/separation = 50

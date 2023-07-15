@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://game/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/Game.gd" type="Script" id=3]
+[ext_resource path="res://game/Item.tscn" type="PackedScene" id=4]
+[ext_resource path="res://asset/font/Peach-Days.tres" type="DynamicFont" id=5]
+[ext_resource path="res://asset/background.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 260, 960 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 800, 242 )
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 3 )
+itemScene = ExtResource( 4 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 360, 640 )
+rotation = 1.5708
+scale = Vector2( 0.668, 0.668 )
+texture = ExtResource( 6 )
+
+[node name="Item" parent="." instance=ExtResource( 4 )]
+
+[node name="Ball" parent="." instance=ExtResource( 2 )]
+position = Vector2( 440, 59 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 557, 1918 )
+
+[node name="StartPosition" type="Position2D" parent="."]
+position = Vector2( 557, 1880 )
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2( -71, 640 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2( -189, 0 )
+shape = SubResource( 1 )
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2( 980, 640 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource( 1 )
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2( 360, -152 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2( 0, -90 )
+shape = SubResource( 2 )
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+position = Vector2( 360, 1612 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+position = Vector2( 0, -90 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 28.0
+margin_top = 21.0
+margin_right = 264.0
+margin_bottom = 99.0
+custom_colors/font_color = Color( 0.941176, 0.941176, 0.941176, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "Score: 00"
+
+[node name="BestScoreLabel" type="Label" parent="."]
+margin_left = 28.0
+margin_top = 93.0
+margin_right = 264.0
+margin_bottom = 171.0
+custom_colors/font_color = Color( 0.941176, 0.941176, 0.941176, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "Best Score: 00"
+
+[connection signal="body_entered" from="Item" to="." method="_on_Item_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
